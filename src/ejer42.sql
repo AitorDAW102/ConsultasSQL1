@@ -15,3 +15,13 @@ SELECT CodigoPedido, Estado FROM Pedidos
 	ORDER BY CodigoPedido DESC;
 
 SELECT * FROM Pedidos;
+
+SELECT Estado, COUNT(CodigoPedido) AS numeroPedidos FROM Pedidos
+	GROUP BY Estado;
+
+
+SELECT Nombre, PrecioVenta FROM Productos
+	ORDER BY PrecioVenta DESC;
+
+SELECT Nombre, PrecioVenta FROM Productos
+	ORDER BY PrecioVenta ASC;
