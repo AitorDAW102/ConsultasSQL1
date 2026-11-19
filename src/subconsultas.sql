@@ -24,10 +24,15 @@ SELECT DISTINCT Division FROM equipos
 						WHERE Procedencia = 'Spain');
 
 
-SELECT nombre,Altura FROM jugadores
-	WHERE Nombre_equipo IN (SELECT Nombre FROM equipos
+SELECT Nombre, Altura FROM jugadores
+WHERE Altura = (SELECT MIN(altura) FROM jugadores
+WHERE Nombre_equipo IN (SELECT Nombre FROM equipos
+						WHERE Division = 'SouthEast')) AND Nombre_equipo IN (SELECT Nombre FROM equipos
 						WHERE Division = 'SouthEast')
-	AND Altura = (SELECT MIN(altura) FROM jugadores)
+
+SELECT codigo FROM jugadores
+	WHERE codigo IN (SELECT jugador FROM estadisticas
+			WHERE Puntos_por_partido > (SELECT AVG(Puntos_por_partido) FROM estadisticas));
 
 
 SELECT nombre FROM jugadores
@@ -35,3 +40,15 @@ SELECT nombre FROM jugadores
 					WHERE Nombre_equipo = 'Timberwolves')
 	AND Nombre_equipo= 'Timberwolves';
 
+
+
+SELECT COUNT(j.nombre) AS NumeroJugadores, j.Nombre_equipo FROM jugadores j /* CONSULTAS CORRELADAS para poder usar un valor dentro de un subconjunto */
+	WHERE j.Peso>(SELECT AVG(ju.peso) FROM jugadores ju
+						WHERE j.Nombre_equipo=ju.Nombre_equipo)
+	GROUP BY j.Nombre_equipo
+	HAVING COUNT(j.nombre)>=5;
+
+SELECT COUNT(codigo) AS NumeroJugadores, Nombre_equipo FROM jugadores
+	WHERE Procedencia = 'Spain'
+	GROUP BY Nombre_equipo
+	HAVING COUNT(codigo)>=2;
