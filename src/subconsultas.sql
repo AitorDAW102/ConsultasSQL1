@@ -52,3 +52,37 @@ SELECT COUNT(codigo) AS NumeroJugadores, Nombre_equipo FROM jugadores
 	WHERE Procedencia = 'Spain'
 	GROUP BY Nombre_equipo
 	HAVING COUNT(codigo)>=2;
+
+SELECT DISTINCT Division FROM equipos
+WHERE Division NOT IN (SELECT DISTINCT Division FROM equipos
+	WHERE nombre IN (SELECT nombre_equipo FROM jugadores
+			WHERE Procedencia = 'Slovenia'));
+
+SELECT * FROM equipos
+	WHERE Nombre IN (SELECT nombre_equipo FROM jugadores)
+	GROUP BY Nombre
+	HAVING COUNT(Nombre)>=15;
+
+
+SELECT Nombre FROM equipos
+	WHERE Nombre IN (SELECT Nombre_equipo FROM jugadores)
+
+SELECT * FROM equipos 
+	WHERE Nombre IN (SELECT Nombre_equipo FROM jugadores
+			GROUP BY Nombre_equipo
+			HAVING COUNT(codigo)>=15);
+
+SELECT * FROM equipos 
+	WHERE EXISTS (SELECT Nombre_equipo FROM jugadores
+			WHERE equipos.Nombre=jugadores.Nombre_equipo
+			GROUP BY Nombre_equipo
+			HAVING COUNT(codigo)>=15);
+
+USE compras;
+
+SELECT nombrpro FROM Proveedores
+	WHERE codigpro IN (SELECT codigpro FROM Pedidos)
+
+SELECT nombrpro FROM Proveedores
+	WHERE EXISTS (SELECT codigpro FROM Pedidos /* SIEMPRE QUE USE EXIST TENGO QUE EN LA SUBCONSULTA HACER EN SU WHERE UNA COMPARACION */
+		WHERE Proveedores.codigpro = Pedidos.codigpro)
