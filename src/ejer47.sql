@@ -77,9 +77,6 @@ FROM DetallePedidos
 GROUP BY CodigoProducto 
 ORDER BY CantidadTotal DESC;
 
-SELECT CodigoPedido, CodigoCliente, FechaEsperada, FechaEntrega 
-FROM Pedidos 
-WHERE FechaEntrega <= DATE_SUB(FechaEsperada, INTERVAL 2 DAY);
 
 SELECT 
     SUM(Cantidad * PrecioUnidad) AS BaseImponible,
