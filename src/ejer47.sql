@@ -2,7 +2,7 @@ USE Jardineria
 
 SELECT Ciudad, Telefono 
 FROM Oficinas 
-WHERE Pais = 'EE. UU.' OR Pais = 'Estados Unidos';
+WHERE Pais = 'EE.UU.' OR Pais = 'Estados Unidos';
 
 
 SELECT e.Nombre, e.Apellido1, e.Apellido2, e.Email 
