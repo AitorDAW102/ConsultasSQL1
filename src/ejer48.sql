@@ -15,7 +15,7 @@ SELECT c.CodigoCliente, c.NombreCliente, c.LimiteCredito,
 		HAVING c.LimiteCredito > SUM(dp.Cantidad * dp.PrecioUnidad);
 
 SELECT Nombre, CantidadEnStock FROM Productos
-	Where CantidadEnStock = (SELECT MAX(cantidadEnStock) FROM productos);
+	WHERE CantidadEnStock = (SELECT MAX(cantidadEnStock) FROM productos);
 
 SELECT Nombre, CantidadEnStock FROM Productos
-	Where CantidadEnStock = (SELECT MIN(cantidadEnStock) FROM productos);
+	WHERE CantidadEnStock = (SELECT MIN(cantidadEnStock) FROM productos);
