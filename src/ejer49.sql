@@ -11,5 +11,9 @@ SELECT e.Nombre AS Empleado, j.Nombre AS Jefe FROM Empleados e
 JOIN Empleados j ON j.CodigoEmpleado = e.CodigoJefe
 	ORDER BY j.CodigoJefe;
 
-SELECT c.NombreCliente FROM Clientes c JOIN Pedidos p ON c.CodigoCliente=p.CodigoCliente
-	WHERE FechaEntrega>FechaEsperada;
+SELECT DISTINCT c.NombreCliente FROM Clientes c JOIN Pedidos p ON c.CodigoCliente=p.CodigoCliente
+	WHERE p.FechaEntrega>p.FechaEsperada;
+
+SELECT NombreCliente FROM Clientes
+	WHERE CodigoCliente IN (SELECT CodigoCliente FROM Pedidos
+		WHERE FechaEntrega>FechaEsperada);
