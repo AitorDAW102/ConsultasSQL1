@@ -13,6 +13,9 @@ SELECT COUNT(pr.codigpro) AS numeroPerAnio, pr.nombrpro FROM Proveedores pr INNE
 ON pr.codigpro=pe.codigpro AND YEAR(pe.fechaped)=2010
 GROUP BY pr.nombrpro
 
+SELECT pr.*, pe.* FROM Proveedores pr CROSS JOIN Pedidos pe
+ORDER BY pe.codigpro
+
 USE Jardineria;
 
 SELECT c.NombreCliente, e.Nombre, e.Apellido1+' '+e.Apellido2 AS Apellidos, o.Ciudad FROM Clientes c JOIN Empleados e
@@ -36,3 +39,4 @@ SELECT c.NombreCliente, e.Nombre, e.Apellido1+' '+e.Apellido2 AS Apellidos FROM 
 	ON c.CodigoEmpleadoRepVentas=e.CodigoEmpleado
 		WHERE e.CodigoOficina IN (SELECT o.CodigoOficina FROM Oficinas o
 			WHERE Ciudad LIKE 'Barcelona');
+
